@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lilmeowz.picks | Aesthetic Outfit & Style Finds</title>
+  
+  <!-- Font Google (Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-color: #faf4f0;
+      --card-bg: rgba(255, 255, 255, 0.93);
+      --text-main: #2b2b2b;
+      --text-muted: #787878;
+      --accent-color: #e8a598;
+      --accent-hover: #d99183;
+      --border-radius: 16px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-color);
+      
+      /* Background pattern tapak kucing */
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 100 100"><g fill="%23f2b2b2" opacity="0.38"><path d="M 50,55 C 38,55 32,68 38,80 C 42,88 58,88 62,80 C 68,68 62,55 50,55 Z" /><ellipse cx="30" cy="45" rx="8" ry="11" transform="rotate(-25 30 45)" /><ellipse cx="43" cy="35" rx="8" ry="11" transform="rotate(-8 43 35)" /><ellipse cx="57" cy="35" rx="8" ry="11" transform="rotate(8 57 35)" /><ellipse cx="70" cy="45" rx="8" ry="11" transform="rotate(25 70 45)" /></g></svg>');
+      background-repeat: repeat;
+      background-size: 90px 90px;
+      
+      color: var(--text-main);
+      padding: 20px 12px;
+      max-width: 680px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    /* Profile Header */
+    .header {
+      text-align: center;
+      padding: 24px 16px 16px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .profile-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #f8e5e0;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      border: 3px solid #fff;
+    }
+
+    .header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Search Bar */
+    .search-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1px solid #ebe6df;
+      border-radius: 25px;
+      background: var(--card-bg);
+      font-size: 0.9rem;
+      outline: none;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+    }
+
+    .search-container input:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(232, 165, 152, 0.25);
+    }
+
+    .search-container i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    /* Filter Categories */
+    .categories {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-btn {
+      background: var(--card-bg);
+      border: 1px solid #ebe6df;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.825rem;
+      font-weight: 500;
+      color: var(--text-main);
+      white-space: nowrap;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+    }
+
+    .cat-btn.active, .cat-btn:hover {
+      background: var(--accent-color);
+      color: #fff;
+      border-color: var(--accent-color);
+    }
+
+    /* Product Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    /* Card Utuh sebagai Link */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* Aspect Ratio 1:1 */
+      background: #f5f5f5;
+    }
+
+    .card-img-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #ee4d2d;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-content {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: center;
+      align-items: center; /* Rata tengah horizontal */
+      text-align: center; /* Teks rata tengah */
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px 0;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(4px);
+      border-radius: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="profile-avatar">🐾</div>
+    <h1>lilmeowz.picks</h1>
+    <p>Curated aesthetic finds & outfit inspirations ✨</p>
+  </header>
+
+  <!-- Search -->
+  <div class="search-container">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <!-- Placeholder disesuaikan agar pengunjung tahu bisa cari pakai nomor atau nama -->
+    <input type="text" id="searchInput" placeholder="Cari nomor produk / nama barang..." onkeyup="filterProducts()">
+  </div>
+
+  <!-- Categories -->
+  <div class="categories">
+    <button class="cat-btn active" onclick="filterCategory('all', event)">Semua</button>
+    <button class="cat-btn" onclick="filterCategory('outfit', event)">Outfit</button>
+    <button class="cat-btn" onclick="filterCategory('bags', event)">Tas & Dompet</button>
+    <button class="cat-btn" onclick="filterCategory('shoes', event)">Sepatu</button>
+    <button class="cat-btn" onclick="filterCategory('acc', event)">Aksesori</button>
+  </div>
+
+  <!-- Product Grid -->
+  <main class="grid" id="productGrid">
+
+    <!-- Item 1 -->
+    <!-- Catatan: data-code diisi nomor produk, data-title diisi nama/kata kunci barang -->
+    <a href="LINK_AFFILIATE_SHOPEE_1" target="_blank" class="card" data-category="outfit" data-code="1" data-title="oversize cardigan knit korean style">
+      <div class="card-img-wrapper">
+        <span class="badge"><i class="fa-solid fa-bag-shopping"></i> Shopee</span>
+        <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&q=80" alt="Cardigan Knit">
+      </div>
+      <div class="card-content">
+        <div class="card-title">1</div>
+      </div>
+    </a>
+
+    <!-- Item 2 -->
+    <a href="LINK_AFFILIATE_SHOPEE_2" target="_blank" class="card" data-category="bags" data-code="2" data-title="aesthetic shoulder bag vintage canvas">
+      <div class="card-img-wrapper">
+        <span class="badge"><i class="fa-solid fa-bag-shopping"></i> Shopee</span>
+        <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500&q=80" alt="Shoulder Bag">
+      </div>
+      <div class="card-content">
+        <div class="card-title">2</div>
+      </div>
+    </a>
+
+    <!-- Item 3 -->
+    <a href="LINK_AFFILIATE_SHOPEE_3" target="_blank" class="card" data-category="shoes" data-code="3" data-title="platform sneakers white retro">
+      <div class="card-img-wrapper">
+        <span class="badge"><i class="fa-solid fa-bag-shopping"></i> Shopee</span>
+        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&q=80" alt="Sneakers">
+      </div>
+      <div class="card-content">
+        <div class="card-title">3</div>
+      </div>
+    </a>
+
+    <!-- Item 4 -->
+    <a href="LINK_AFFILIATE_SHOPEE_4" target="_blank" class="card" data-category="acc" data-code="4" data-title="kacamata hitam oval retro aesthetic">
+      <div class="card-img-wrapper">
+        <span class="badge"><i class="fa-solid fa-bag-shopping"></i> Shopee</span>
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&q=80" alt="Kacamata">
+      </div>
+      <div class="card-content">
+        <div class="card-title">4</div>
+      </div>
+    </a>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 lilmeowz.picks • All affiliate links verified</p>
+  </footer>
+
+  <!-- Script untuk Fitur Filter & Search -->
+  <script>
+    function filterCategory(category, evt) {
+      const cards = document.querySelectorAll('.card');
+      const buttons = document.querySelectorAll('.cat-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      if(evt) evt.target.classList.add('active');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterProducts() {
+      const input = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const title = (card.dataset.title || '').toLowerCase();
+        const code = (card.dataset.code || '').toLowerCase();
+        
+        // Memeriksa pencarian berdasarkan kode/nomor maupun nama produk
+        if (code.includes(input) || title.includes(input)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
